@@ -1,0 +1,29 @@
+class Queue(object):
+    def __init__(self):
+        self.first = []
+    
+    def push(self, dt):
+        self.first.append(dt)
+    
+    def pop(self):
+        self.second.append(self.first[0])
+        self.first.pop(0)
+
+    def peek(self):
+        if len(self.first)!=0:
+            return self.first[0]
+        else:
+            return None
+
+queue = Queue()
+input_cmd = int(input())
+for line in range(input_cmd):
+    value = list(map(int,input().split()))
+    if value[0] == 1:
+        queue.push(value[1])
+    
+    if value[0] == 2:
+        queue.pop()
+    
+    if value[0] == 3:
+        print(queue.peek())
