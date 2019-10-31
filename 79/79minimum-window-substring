@@ -1,0 +1,38 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        if len(s) < len(t):
+            return ""
+        m = {}
+        for i in t:
+            if m.get(i) is None:
+                m[i] = 1
+            else:
+                m[i] +=1
+        
+        left = 0
+        right = 0
+        match = 0
+        minlen = len(s) + 1
+        idx = 0
+        for right in range(len(s)):
+            
+            if m.get(s[right]) is not None:
+                m[s[right]] -=1
+                if m[s[right]] >= 0:
+                    match +=1
+                while match == len(t):
+                    if (right - left +1 )< minlen:
+                        minlen = right - left +1
+                        idx = left
+                    
+                    if m.get(s[left]) is not None:
+                        if m[s[left]]==0:
+                            match -=1
+                        m[s[left]] +=1
+                       
+                    left +=1
+                            
+        if minlen >len(s):
+            return ""
+        else:
+            return s[idx:(idx+minlen)]
